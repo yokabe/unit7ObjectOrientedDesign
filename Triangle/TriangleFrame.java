@@ -13,15 +13,18 @@ public class TriangleFrame extends JFrame
     private double prevX;
     private double prevY;
     
+    private int click;
+    
+    
     private TriangleComponent scene;
     
     class MouseClickListener implements MouseListener
     {
         public void mouseClicked(MouseEvent event)
         {
-            currentX = event.getX();
-            currentY = event.getY();
-            
+            double x = getX();
+            double y = getY();
+            scene.addPoint(x, y);
         }
         // DO NOTHINGS
         public void mouseReleased(MouseEvent event){}
@@ -33,12 +36,16 @@ public class TriangleFrame extends JFrame
     
     public TriangleFrame()
     {
-        scene = new TriangleComponent(0, 0, currentX, currentY);
-        add(scene);
+        scene = new TriangleComponent();
+        
         
         MouseListener listener = new MouseClickListener();
         scene.addMouseListener(listener);
         
+        
+        
         setSize(WIDTH, HEIGHT);
+        
+        add(scene);
     }
 }
