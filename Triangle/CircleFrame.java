@@ -2,7 +2,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 
-public class TriangleFrame extends JFrame
+public class CircleFrame extends JFrame
 {
     private static final int WIDTH = 400;
     private static final int HEIGHT = 400;
@@ -12,15 +12,29 @@ public class TriangleFrame extends JFrame
     private int click;
     
     
-    private TriangleComponent scene;
+    private CircleComponent scene;
     
     class MouseClickListener implements MouseListener
     {
         public void mouseClicked(MouseEvent event)
         {
-            double x = event.getX();
-            double y = event.getY();
-            scene.addPoint(x, y);
+            click++;
+            if (click == 1)
+            {
+                double xC = event.getX();
+                double yC = event.getY();
+                scene.addPoint(xC, yC);
+            }
+            else if (click == 2)
+            {
+                double xH = event.getX();
+                double yH = event.getX();
+                scene.addPoint(xH, yH);
+            }
+            else
+            {
+                click = 0;
+            }
         }
         // DO NOTHINGS
         public void mouseReleased(MouseEvent event){}
@@ -30,9 +44,9 @@ public class TriangleFrame extends JFrame
         }
     
     
-    public TriangleFrame()
+    public CircleFrame()
     {
-        scene = new TriangleComponent();
+        scene = new CircleComponent();
         add(scene);
         
         MouseListener listener = new MouseClickListener();

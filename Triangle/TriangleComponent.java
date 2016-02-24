@@ -2,7 +2,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
 import javax.swing.JComponent;
-import java.awt.geom.Point2D;
+
 public class TriangleComponent extends JComponent
 {
     private double p1X;
@@ -32,8 +32,20 @@ public class TriangleComponent extends JComponent
         Graphics2D g2 = (Graphics2D) g;
         if (click == 2)
         {
-            line1.setLine(p1X, p2X, p1Y, p2Y);
+            line1.setLine(p1X, p1Y, p2X, p2Y);
             g2.draw(line1);
+        }
+        else if (click == 3)
+        {
+            g2.draw(line1);
+            line2.setLine(p2X, p2Y, p3X, p3Y);
+            line3.setLine(p1X, p1Y, p3X, p3Y);
+            g2.draw(line2);
+            g2.draw(line3);
+        }
+        else
+        {
+            
         }
         
     }
@@ -51,6 +63,16 @@ public class TriangleComponent extends JComponent
             p2X = x;
             p2Y = y;
         }
+        else if (click == 3)
+        {
+            p3X = x;
+            p3Y = y;
+        }
+        else
+        {
+            click = 0;
+        }
+        repaint();
     }
     
 }
