@@ -24,12 +24,12 @@ public class ControlPanel extends JPanel
         circle.addActionListener(l);
         pickColor.addActionListener(l);
         square.addActionListener(l);
-        canvas = canvas;
+        this.canvas = canvas;
         
         
         
         displayColor = new JPanel();
-        displayColor.setBackground(canvas.getColor());
+        
         add(pickColor);
         add(displayColor);
         add(circle);
@@ -56,7 +56,8 @@ public class ControlPanel extends JPanel
             }
             else
             {
-                
+                canvas.pickColor();
+                displayColor.setBackground(canvas.getColor());
             }
             
         }

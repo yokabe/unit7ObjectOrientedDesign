@@ -1,53 +1,57 @@
+import java.awt.geom.Point2D;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
-
-/**
- * Write a description of abstract class Shape here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public abstract class Shape
 {
-    /** description of instance variable x (add comment for each instance variable) */
-    private int x;
-
-    /**
-     * Default constructor for objects of class Shape
-     */
-    public Shape()
+    private Point2D.Double cent;
+    private double rad;
+    private Color currColor;
+    
+    
+    public Shape(Point2D.Double center, double radius, Color color)
     {
-        // initialise instance variables
-        x = 0;
+        cent = center;
+        rad = radius;
+        currColor = color;
     }
     
-    /**
-     * An example of an abstract method - replace this comment with your own
-     *    that describes the operation of the method
-     *
-     * @pre        preconditions for the method
-     *            (what the method assumes about the method's parameters and class's state)
-     * @post    postconditions for the method
-     *            (what the method guarantees upon completion)
-     * @param    y    description of parameter y
-     * @return    description of the return value
-     */
-    public abstract int sampleAbstractMethod(int y);
-
-    /**
-     * An example of a method - replace this comment with your own
-     *    that describes the operation of the method
-     *
-     * @pre        preconditions for the method
-     *            (what the method assumes about the method's parameters and class's state)
-     * @post    postconditions for the method
-     *            (what the method guarantees upon completion)
-     * @param    y    description of parameter y
-     * @return    description of the return value
-     */
-    public int sampleMethod(int y)
+    public Point2D.Double getCenter()
     {
-        // put your code here
-        return x+y;
+        return cent;
     }
-
+    
+    public double getRadius()
+    {
+        return rad;
+    }
+    
+    public void move(double x, double y)
+    {
+        cent.setLocation(x, y);
+    }
+    
+    public void setRadius(double r)
+    {
+        rad = r;
+    }
+    
+    public abstract boolean isInside(Point2D.Double point);
+    //     {
+        //         boolean state = false;
+        //         double x = point.getX();
+        //         double y = point.getY();
+        //         if (x <= cent.getX()+rad || x >= cent.getX()-rad)
+        //         {
+            //             if (y <= cent.getY()+rad || y >= cent.getY()-rad)
+            //             {
+                //                 state = true;
+                //             }
+                //         }
+                //         return state;
+                //     }
+    
+    public abstract void draw(Graphics2D g2, boolean filled);
+    
 }

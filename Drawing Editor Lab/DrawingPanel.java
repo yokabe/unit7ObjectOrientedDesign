@@ -13,12 +13,15 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Dimension;
 
 public class DrawingPanel extends JPanel
 {
     private ArrayList<Shape> shapes;
     private Color currentColor;
     private JColorChooser chooseColor;
+    
+    private DrawingPanel panel;
     
     private Shape activeShape;
     
@@ -70,7 +73,7 @@ public class DrawingPanel extends JPanel
     
     public void pickColor()
     {
-        JColorChooser choose = new JColorChooser();
+        JColorChooser.showDialog(this, "Pick a Color", Color.BLUE);
         
     }
     
@@ -83,7 +86,16 @@ public class DrawingPanel extends JPanel
     {
     }
     
+    public Dimension getPreferredSize()
+    {
+        return getSize();
+    }
+    
     public void paintComponent(Graphics g)
     {
+        super.paintComponent(g);
+        Graphics2D g2 = (Graphics2D) g;
+        
+        
     }
 }
