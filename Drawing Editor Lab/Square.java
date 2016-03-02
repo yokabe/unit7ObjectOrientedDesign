@@ -26,17 +26,7 @@ public class Square extends Shape
     
     public boolean isInside(Point2D.Double point)
     {
-        boolean state = false;
-        double x = point.getX();
-        double y = point.getY();
-        if (x <= getCenter().getX()+rad || x >= getCenter().getX()-rad)
-        {
-            if (y <= getCenter().getY()+rad || y >= getCenter().getY()-rad)
-            {
-                state = true;
-            }
-        }
-        return state;
+        return square.contains(point.getX(), point.getY());
     
     }
     
