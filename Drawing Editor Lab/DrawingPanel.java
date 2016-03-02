@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.swing.JColorChooser;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.geom.Point2D;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Dimension;
@@ -20,9 +21,9 @@ public class DrawingPanel extends JPanel
     private ArrayList<Shape> shapes;
     private Color currentColor;
     private JColorChooser chooseColor;
-    
+    private Point2D.Double point;
     private DrawingPanel panel;
-    
+    private int count;
     private Shape activeShape;
     
     public DrawingPanel()
@@ -32,7 +33,7 @@ public class DrawingPanel extends JPanel
         MouseMotionListener molistener = new MouseMotion();
         KeyListener keyListener = new KeyClick();
         currentColor = Color.BLUE;
-        
+        point = new Point2D.Double(0, 0);
         
     }
     
@@ -73,17 +74,25 @@ public class DrawingPanel extends JPanel
     
     public void pickColor()
     {
-        JColorChooser.showDialog(this, "Pick a Color", Color.BLUE);
+        
+        currentColor = JColorChooser.showDialog(this, "Pick a Color", Color.BLUE);
         
     }
     
     public void addCircle()
     {
-        System.out.println("hi");
+        Circle c = new Circle(point, 50, getColor());
+        shapes.add(c);
+        count++;
+        repaint();
     }
     
     public void addSquare()
     {
+        Square s = new Square(point, 50, getColor());
+        shapes.add(s);
+        count++;
+        repaint();
     }
     
     public Dimension getPreferredSize()
@@ -95,7 +104,13 @@ public class DrawingPanel extends JPanel
     {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        
+        if ( count != 0)
+        {
+            for (Shape s : shapes)
+            {
+                s.draw(g2, true);
+            }
+        }
         
     }
 }

@@ -2,7 +2,7 @@ import java.awt.Button;
 import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.Color;
 
 public class ControlPanel extends JPanel
 {
@@ -29,7 +29,7 @@ public class ControlPanel extends JPanel
         
         
         displayColor = new JPanel();
-        
+        displayColor.setBackground(Color.BLUE);
         add(pickColor);
         add(displayColor);
         add(circle);

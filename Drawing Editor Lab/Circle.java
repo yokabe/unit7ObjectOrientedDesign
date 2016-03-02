@@ -1,40 +1,52 @@
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Point2D;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
-
-/**
- * Write a description of class Circle here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class Circle
+public class Circle extends Shape
 {
-    /** description of instance variable x (add comment for each instance variable) */
-    private int x;
-
-    /**
-     * Default constructor for objects of class Circle
-     */
-    public Circle()
+    private Ellipse2D.Double circle;
+    private DrawingPanel canvas;
+    private double rad;
+    private Color col;
+    
+    public Circle(Point2D.Double center, double radius, Color color)
     {
-        // initialise instance variables
-        x = 0;
+       
+        super(center, radius, color);
+        this.rad = radius;
+        this.col = color;
+        double x = getCenter().getX() - getRadius();
+        double y = getCenter().getY() - getRadius();
+        double w = getRadius()*2;
+        double h = getRadius()*2;
+        circle = new Ellipse2D.Double(x, y, w, h);
     }
-
-    /**
-     * An example of a method - replace this comment with your own
-     *    that describes the operation of the method
-     *
-     * @pre        preconditions for the method
-     *            (what the method assumes about the method's parameters and class's state)
-     * @post    postconditions for the method
-     *            (what the method guarantees upon completion)
-     * @param    y    description of parameter y
-     * @return    description of the return value
-     */
-    public int sampleMethod(int y)
+    
+    public boolean isInside(Point2D.Double point)
     {
-        // put your code here
-        return x+y;
+        boolean state = false;
+        double x = point.getX();
+        double y = point.getY();
+        if (x <= getCenter().getX()+rad || x >= getCenter().getX()-rad)
+        {
+            if (y <= getCenter().getY()+rad || y >= getCenter().getY()-rad)
+            {
+                state = true;
+            }
+        }
+        return state;
+    
     }
-
+    
+    public void draw(Graphics2D g2, boolean filled)
+    {
+        g2.draw(circle);
+        if (filled)
+        {
+            g2.setColor(col);
+            g2.fill(circle);
+        }
+    }
 }
