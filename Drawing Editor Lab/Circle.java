@@ -17,7 +17,7 @@ public class Circle extends Shape
     
     public boolean isInside(Point2D.Double point)
     {
-        double x = getCenter().getX() - getRadius();
+         double x = getCenter().getX() - getRadius();
         double y = getCenter().getY() - getRadius();
         double w = getRadius()*2;
         double h = getRadius()*2;
@@ -33,10 +33,12 @@ public class Circle extends Shape
         double w = getRadius()*2;
         double h = getRadius()*2;
         Ellipse2D.Double circle = new Ellipse2D.Double(x, y, w, h);
+        DrawingPanel pan = new DrawingPanel();
+        
         g2.draw(circle);
         if (filled)
         {
-            g2.setColor(super.getColor());
+            g2.setColor(pan.getColor());
             g2.fill(circle);
         }
     }

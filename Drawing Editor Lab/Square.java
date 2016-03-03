@@ -6,36 +6,39 @@ import java.awt.Graphics2D;
 
 public class Square extends Shape
 {
-    private Rectangle2D.Double square;
-    private DrawingPanel canvas;
-    private double rad;
-    private Color col;
+    
     
     public Square(Point2D.Double center, double radius, Color color)
     {
        
         super(center, radius, color);
-        this.rad = radius;
-        this.col = color;
-        double x = getCenter().getX() - getRadius();
-        double y = getCenter().getY() - getRadius();
-        double w = getRadius()*2;
-        double h = getRadius()*2;
-        square = new Rectangle2D.Double(x, y, w, h);
+    
     }
     
     public boolean isInside(Point2D.Double point)
     {
+        double x = getCenter().getX() - getRadius();
+        double y = getCenter().getY() - getRadius();
+        double w = getRadius()*2;
+        double h = getRadius()*2;
+        Rectangle2D.Double square = new Rectangle2D.Double(x, y, w, h);
         return square.contains(point.getX(), point.getY());
     
     }
     
     public void draw(Graphics2D g2, boolean filled)
     {
+        double x = getCenter().getX() - getRadius();
+        double y = getCenter().getY() - getRadius();
+        double w = getRadius()*2;
+        double h = getRadius()*2;
+        Rectangle2D.Double square = new Rectangle2D.Double(x, y, w, h);
+        DrawingPanel pan = new DrawingPanel();
+        
         g2.draw(square);
         if (filled)
         {
-            g2.setColor(col);
+            g2.setColor(pan.getColor());
             g2.fill(square);
         }
     }

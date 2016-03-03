@@ -17,6 +17,8 @@ public abstract class Shape
         currColor = color;
     }
     
+
+    
     public Point2D.Double getCenter()
     {
         return cent;
