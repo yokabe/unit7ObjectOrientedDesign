@@ -38,7 +38,7 @@ public class Square extends Shape
         g2.draw(square);
         if (filled)
         {
-            g2.setColor(pan.getColor());
+            g2.setColor(super.getColor());
             g2.fill(square);
         }
     }

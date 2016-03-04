@@ -27,7 +27,8 @@ public class DrawingPanel extends JPanel
     private int count;
     private Shape activeShape;
     private boolean state;
-    
+    private static final double X = 150;
+    private static final double Y = 150;
     public DrawingPanel()
     {
         setBackground(Color.WHITE);
@@ -40,8 +41,8 @@ public class DrawingPanel extends JPanel
         currentColor = Color.BLUE;
         
         Random r1 = new Random();
+        point = new Point2D.Double(X, Y);
         
-        point = new Point2D.Double(110, 110);
         shapes = new ArrayList<Shape>();
     }
     
@@ -51,7 +52,11 @@ public class DrawingPanel extends JPanel
         {
         }
         // DO NOTHINGS
-        public void mouseReleased(MouseEvent event){}
+        public void mouseReleased(MouseEvent event)
+        {
+            state = true;
+            repaint();
+        }
         public void mousePressed(MouseEvent event)
         {
             int count = 0;
@@ -65,7 +70,7 @@ public class DrawingPanel extends JPanel
                     if (s.isInside(a))
                     {
                         activeShape = s;
-                        System.out.println("1");
+                        state = true;
                     }   
                 }
                 state = false;
@@ -111,9 +116,11 @@ public class DrawingPanel extends JPanel
     
     public void addCircle()
     {
+       
         Circle c = new Circle(point, 50, getColor());
         shapes.add(c);
         count++;
+        System.out.println(shapes);
         repaint();
     }
     
@@ -121,7 +128,8 @@ public class DrawingPanel extends JPanel
     {
         Square s = new Square(point, 50, getColor());
         shapes.add(s);
-        count++;
+        count++;    
+        System.out.println(shapes);
         repaint();
     }
     
@@ -138,10 +146,18 @@ public class DrawingPanel extends JPanel
         {
             for (Shape s : shapes)
             {
-                s.draw(g2, true);
+                if (s != activeShape)
+                {
+                    s.draw(g2, true);
+                }
+                else
+                {
+                    activeShape.draw(g2, state);
+                }
+              
             }
         }
-       
+        
         
         
     }
